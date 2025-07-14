@@ -1,31 +1,25 @@
 import React from "react";
-import { IoIosSunny, IoIosMoon } from "react-icons/io";
-import { useState } from "react";
+
+import {
+  Route,
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+} from "react-router-dom";
+
+import MainLayout from "./Layout/MainLayout";
+import HomePage from "./Pages/HomePage";
 
 const App = () => {
-  const [theme, setTheme] = useState("");
-  return (
-    <div
-      className={`${
-        theme ? "dark" : ""
-      } bg-white dark:bg-zinc-800 grid place-items-center h-screen w-full`}
-    >
-      <div className="bg-zinc-300 p-2 rounded-xl">
-        <button
-          onClick={() => setTheme("")}
-          className="bg-transparent p-3 hover:bg-zinc-200 dark:hover:bg-zinc-100/10 rounded-lg text-black dark:text-white"
-        >
-          <IoIosSunny />
-        </button>
-        <button
-          onClick={() => setTheme("dark")}
-          className="bg-transparent p-3 hover:bg-zinc-200 dark:hover:bg-zinc-100/10 rounded-lg text-black dark:text-white "
-        >
-          <IoIosMoon />
-        </button>
-      </div>
-    </div>
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path="/" element={<MainLayout />}>
+        <Route index element={<HomePage />} />
+      </Route>
+    )
   );
+
+  return <RouterProvider router={router} />;
 };
 
 export default App;
